@@ -36,14 +36,14 @@ pip install -r requirements.txt
 
 ## 训练
 
-训练可运行以下命令：
+训练时请将训练集与测试集放到Mycode1的同级目录下，并且修改shell脚本中的文件路径。以下是训练命令：
 ```
 bash Mycode1/run_checkpoint.sh
 ```
 
 ## 推理
 
-如果只需要推理可以尝试以下命令：
+如果只需推理同理，推理命令如下：
 
 ```
 bash Mycode1/run_checkpoint_testonly.sh

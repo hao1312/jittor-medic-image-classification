@@ -1,0 +1,5 @@
+root_path: "/root/workspace/TrainSet"
+test_path: "/root/workspace/TestSetB"
+res_path: "./results/"
+
+epochs: 100

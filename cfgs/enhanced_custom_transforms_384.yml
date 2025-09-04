@@ -1,0 +1,61 @@
+transform_train:
+  # 基础变换
+  - type: RandomResizedCrop
+    size: [384, 384]
+    scale: [0.8, 1.1]
+    ratio: [0.8, 1.2]
+
+  - type: RandomHorizontalFlip
+    p: 0.5
+
+  - type: RandomVerticalFlip
+    p: 0.5
+  # === 自定义变换演示 ===
+  
+  # 1. GridDistortion - 网格扭曲变换
+  - type: GridDistortion
+    num_steps: 5
+    distort_limit: 0.05
+    p: 0.3
+
+  # 2. ElasticTransform - 弹性变换  
+  - type: ElasticTransform
+    alpha: 1
+    sigma: 50
+    alpha_affine: 50
+    p: 0.25
+
+  # 3. CoarseDropout - 粗粒度dropout
+  - type: CoarseDropout
+    max_holes: 8
+    max_height: 11
+    max_width: 11
+    min_holes: 5
+    fill_value: 0
+    p: 0.3
+
+  # === 新功能演示：概率性应用RandomAffine ===
+  
+  # 4. 概率性应用单个RandomAffine变换 (新功能!)
+  - type: RandomApply
+    p: 0.5                    # 整体应用概率
+    apply_all: false          # 关键参数：概率应用模式
+    transforms:
+      - type: RandomAffine
+        degrees: 15
+        translate: [0.15, 0.15]
+        scale: [0.8, 1.2]
+        shear: 15
+      - type: ColorJitter
+        brightness: 0.1
+        contrast: 0.1
+        saturation: 0.1
+        hue: 0.05
+
+  # 标准变换
+  - type: ToTensor
+
+transform_val:
+  - type: Resize
+    size: [384, 384]
+  - type: ToTensor  
